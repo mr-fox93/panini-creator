@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 type CircleVariant = {
   style: any;
@@ -37,9 +38,13 @@ const fadeDown = {
 
 const StartAnimationScreen = () => {
   const [startAnimation, setStartAnimation] = useState(true);
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     setStartAnimation(false);
+    setTimeout(() => {
+      navigate("/home");
+    }, 3000);
   };
 
   const circleCommonStyle = {
@@ -80,7 +85,7 @@ const StartAnimationScreen = () => {
         ...circleCommonStyle,
         width: "632px",
         height: "632px",
-        top: "-210px",
+        top: "-300px",
       },
       animation: fadeUp,
     },
@@ -89,7 +94,7 @@ const StartAnimationScreen = () => {
         ...circleCommonStyle,
         width: "632px",
         height: "632px",
-        bottom: "-210px",
+        bottom: "-300px",
       },
       animation: fadeDown,
     },
@@ -99,8 +104,8 @@ const StartAnimationScreen = () => {
     <div
       style={{
         backgroundColor: "white",
-        height: "1000px",
-        width: "1440px",
+        height: "100vh",
+        width: "100vw",
         position: "relative",
         overflow: "hidden",
         display: "flex",
