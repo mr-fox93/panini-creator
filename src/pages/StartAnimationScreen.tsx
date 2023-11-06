@@ -42,13 +42,10 @@ const StartAnimationScreen = () => {
 
   const handleButtonClick = () => {
     setStartAnimation(false);
-  };
-
-  useEffect(() => {
     setTimeout(() => {
       navigate("/home");
     }, 3000);
-  }, []);
+  };
 
   const circleCommonStyle = {
     position: "absolute",
