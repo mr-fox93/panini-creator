@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
+//import "./App.css";
 import StartAnimationScreen from "./pages/StartAnimationScreen";
 import BaseForm from "./components/BaseForm";
 
