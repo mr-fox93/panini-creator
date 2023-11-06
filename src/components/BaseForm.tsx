@@ -67,8 +67,9 @@ const Vegetables = styled.div`
 
 const VegetablesOptions = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, minmax(auto, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 15px;
+  justify-items: end;
 `;
 
 const Button = styled.button`
@@ -76,9 +77,15 @@ const Button = styled.button`
   background: #f0f0f0;
   font-size: 12px;
   font-weight: 400;
-  padding: 0.5rem;
+  padding: 0.6rem;
   text-align: center;
-  width: 100%;
+  min-width: 70px;
+  width: auto;
+
+  &:active {
+    border: 1px solid black;
+    background: white;
+  }
 `;
 
 const Select = styled.select`
