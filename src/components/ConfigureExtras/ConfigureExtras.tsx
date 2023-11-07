@@ -2,13 +2,14 @@ import styled from "styled-components";
 import EggSelect from "./EggSelect";
 import Spreads from "./Spreads";
 import Serving from "./Serving";
+import Topping from "./Topping";
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 630px;
-  height: 543px;
+  height: 623px;
   background: white;
   border: 1px solid black;
   margin: auto;
@@ -49,6 +50,8 @@ const ConfigureExtras = () => {
       <Spreads />
       <Bar />
       <Serving />
+      <Bar />
+      <Topping />
       <Bar />
     </Container>
   );

@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { servingVariant } from "../../data/serving";
+import CircleOff from "../../arrows/CircleOff.svg";
+import CircleOn from "../../arrows/CircleOn.svg";
+import { useState, useEffect } from "react";
 
 const ServingComponent = styled.div`
   width: 468px;
@@ -19,10 +22,12 @@ const Header = styled.header`
 const ServingOption = styled.div`
   display: flex;
   align-items: flex-end; /
+
 `;
 
 const CustomSpread = styled.div`
   display: flex;
+  align-items: flex-end;
 `;
 
 const CustomServigInfo = styled.div`
@@ -36,16 +41,28 @@ const ItemName = styled.p`
   font-size: 12px;
   font-weight: 400;
   margin-right: 20px;
+  margin-left: 7px;
 `;
 
 const Serving = () => {
+  const [servingArray, setServingArray] = useState<string>("");
+
+  const handleAddServing = (item: string) => {
+    setServingArray(item);
+  };
+
+  useEffect(() => {
+    console.log(servingArray);
+  }, [servingArray]);
+
   return (
     <ServingComponent>
       <Header>Serving</Header>
       <ServingOption>
         {servingVariant.map((item) => (
           <CustomSpread>
-            <CustomServigInfo>
+            <CustomServigInfo onClick={() => handleAddServing(item)}>
+              <img src={servingArray === item ? CircleOn : CircleOff} />
               <ItemName>{item}</ItemName>
             </CustomServigInfo>
           </CustomSpread>
