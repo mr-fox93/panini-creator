@@ -37,24 +37,24 @@ export const Bread = styled.div`
 export const Cheese = styled.div`
   width: 469px;
   height: 79px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
 `;
 
 export const Meat = styled.div`
   width: 469px;
   height: 79px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
 `;
 
 export const Dressing = styled.div`
   width: 469px;
   height: 79px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
 `;
 
@@ -97,6 +97,7 @@ export const PaniniName = styled.p`
 
 export const RandomizedButton = styled.button`
   display: flex;
+  align-items: center;
   gap: 10px;
   font-size: 12px;
   font-weight: 400;

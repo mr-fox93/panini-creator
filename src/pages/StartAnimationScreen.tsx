@@ -44,7 +44,7 @@ const StartAnimationScreen = () => {
     setStartAnimation(false);
     setTimeout(() => {
       navigate("/home");
-    }, 3000);
+    }, 1300);
   };
 
   const circleCommonStyle = {

@@ -17,6 +17,7 @@ import DressingCarousel from "../DressingCarousel";
 import VegetablesOptions from "../VegetablesOptions";
 import styled from "styled-components";
 import Dices from "../../arrows/Dices.svg";
+import ConfigureExtras from "../ConfigureExtras/ConfigureExtras";
 
 const MainHeader = styled.div`
   width: calc(630px + 2px);
@@ -64,6 +65,7 @@ const BaseForm = () => {
         </Vegetables>
         <Bar />
       </Container>
+      <ConfigureExtras />
     </>
   );
 };
