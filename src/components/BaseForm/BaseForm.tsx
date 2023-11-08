@@ -84,7 +84,6 @@ const BaseForm = () => {
 
   const onSubmit = (data: SandwichPayload) => {
     console.log(data);
-    // Tutaj możesz wykonać POST request z danymi
   };
 
   return (
