@@ -18,6 +18,7 @@ import VegetablesOptions from "../VegetablesOptions";
 import styled from "styled-components";
 import Dices from "../../arrows/Dices.svg";
 import ConfigureExtras from "../ConfigureExtras/ConfigureExtras";
+import FinalizeOrder from "../FinalizeOrder/FinalizeOrder";
 
 const MainHeader = styled.div`
   width: calc(630px + 2px);
@@ -66,6 +67,7 @@ const BaseForm = () => {
         <Bar />
       </Container>
       <ConfigureExtras />
+      <FinalizeOrder />
     </>
   );
 };
