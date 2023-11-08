@@ -36,7 +36,8 @@ export const Bread = styled.div`
 
 export const Cheese = styled.div`
   width: 469px;
-  height: 79px;
+  //height: 79px;
+  height: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;

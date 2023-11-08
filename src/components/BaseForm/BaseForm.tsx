@@ -10,7 +10,7 @@ import {
   PaniniName,
   RandomizedButton,
 } from "./BaseForm.styles";
-import CheeseSelect from "../CheeseSelect";
+import CheeseSelect, { cheeseSchema } from "../CheeseSelect";
 import BreadCarouseSelect, { breadSchema } from "../BreadCarouseSelect";
 import MeatSelect from "../MeatSelect";
 import DressingCarousel from "../DressingCarousel";
@@ -32,8 +32,10 @@ interface SandwichPayload {
   napkins: boolean;
   base: {
     bread: "FULL GRAIN" | "WHEAT";
+
+    cheese: Array<"MOZZARELLA" | "STRACIATELLA" | "EDAM" | "GOUDA">;
   };
-  //   cheese: Array<"MOZZARELLA" | "STRACIATELLA" | "EDAM" | "GOUDA">;
+
   //   meat: Array<"SALAMI" | "HAM" | "BACON" | "CHICKEN">;
   //   dressing: Array<"OLIVE OIL" | "HONEY_MUSTARD" | "RANCH" | "MAYO">;
   //   vegetables: Array<
@@ -74,12 +76,18 @@ const sandwichSchema = z.object({
   napkins: napkinsSchema,
   base: z.object({
     bread: breadSchema,
+    cheese: cheeseSchema,
   }),
 });
 
 const BaseForm = () => {
   const methods = useForm<SandwichPayload>({
     resolver: zodResolver(sandwichSchema),
+    defaultValues: {
+      base: {
+        cheese: ["EDAM"],
+      },
+    },
   });
 
   const onSubmit = (data: SandwichPayload) => {
