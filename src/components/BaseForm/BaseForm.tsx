@@ -14,7 +14,7 @@ import CheeseSelect, { cheeseSchema } from "../CheeseSelect";
 import BreadCarouseSelect, { breadSchema } from "../BreadCarouseSelect";
 import MeatSelect from "../MeatSelect";
 import DressingCarousel from "../DressingCarousel";
-import VegetablesOptions from "../VegetablesOptions";
+import VegetablesOptions, { vegetablesSchema } from "../VegetablesOptions";
 import styled from "styled-components";
 import Dices from "../../arrows/Dices.svg";
 import ConfigureExtras from "../ConfigureExtras/ConfigureExtras";
@@ -25,6 +25,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { paniniNameSchema } from "../FinalizeOrder/PaniniName";
 import { cuterlySchema } from "../FinalizeOrder/Cutlery";
 import { napkinsSchema } from "../FinalizeOrder/Napkins";
+import { toppingSchema } from "../ConfigureExtras/Topping";
 
 interface SandwichPayload {
   sandwichName: string; // Max. 35 characters
@@ -32,8 +33,18 @@ interface SandwichPayload {
   napkins: boolean;
   base: {
     bread: "FULL GRAIN" | "WHEAT";
-
     cheese: Array<"MOZZARELLA" | "STRACIATELLA" | "EDAM" | "GOUDA">;
+    vegetables: Array<
+      | "SALAD"
+      | "TOMATO"
+      | "OBERGINE"
+      | "BEETROOT"
+      | "PICKLES"
+      | "ONION"
+      | "PEPPER"
+      | "ASPARAGUS"
+      | "CUCUMBER"
+    >;
   };
 
   //   meat: Array<"SALAMI" | "HAM" | "BACON" | "CHICKEN">;
@@ -50,12 +61,12 @@ interface SandwichPayload {
   //     | "CUCUMBER"
   //   >;
   // };
-  // extras: {
-  //   egg: Array<"FRIED EGG" | "OMELET" | "SCRAMBLED EGG">;
-  //   spreads: Array<"BUTTER" | "HUMMUS" | "GUACAMOLE">;
-  //   serving: "COLD" | "WARM" | "GRILLED";
-  //   topping: "SESAME" | null;
-  // };
+  extras: {
+    //   egg: Array<"FRIED EGG" | "OMELET" | "SCRAMBLED EGG">;
+    //   spreads: Array<"BUTTER" | "HUMMUS" | "GUACAMOLE">;
+    //   serving: "COLD" | "WARM" | "GRILLED";
+    topping: "SESAME" | null;
+  };
 }
 
 const MainHeader = styled.div`
@@ -77,6 +88,10 @@ const sandwichSchema = z.object({
   base: z.object({
     bread: breadSchema,
     cheese: cheeseSchema,
+    vegetables: vegetablesSchema,
+  }),
+  extras: z.object({
+    topping: toppingSchema,
   }),
 });
 
@@ -86,6 +101,9 @@ const BaseForm = () => {
     defaultValues: {
       base: {
         cheese: ["EDAM"],
+      },
+      extras: {
+        topping: null,
       },
     },
   });

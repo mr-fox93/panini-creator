@@ -42,6 +42,7 @@ const DropdownList = styled.ul`
 `;
 
 const ListItem = styled.li`
+  margin-top:20px
   text-align: center;
   padding: 10px;
   border-bottom: 1px solid #000;
@@ -57,6 +58,8 @@ const DropdownsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
 export const cheeseSchema = z.array(
