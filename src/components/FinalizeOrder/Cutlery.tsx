@@ -2,6 +2,8 @@ import { styled } from "styled-components";
 import { useState } from "react";
 import On from "../../arrows/On.svg";
 import Off from "../../arrows/Off.svg";
+import { useFormContext } from "react-hook-form";
+import { z } from "zod";
 
 const CutleryContainer = styled.div`
   display: flex;
@@ -29,22 +31,31 @@ const ItemName = styled.p`
   margin-right: 20px;
 `;
 
+export const cuterlySchema = z.boolean();
+
 const Cutlery = () => {
-  const [cutlery, setCutlery] = useState<boolean>(false);
+  const { register, setValue, watch } = useFormContext();
+  const currentValue = watch("cutlery");
 
   const handleClick = () => {
-    setCutlery(!cutlery);
+    setValue("cutlery", !currentValue);
   };
 
   return (
     <CutleryContainer>
       <Header>Cutlery</Header>
-      <CutlerySelect onClick={() => handleClick()}>
+      <CutlerySelect onClick={handleClick}>
         <ItemName>ADD TO ORDER</ItemName>
+        <input
+          type="checkbox"
+          {...register("cutlery")}
+          style={{ display: "none" }} // ukryj prawdziwy checkbox, aby móc pokazać obrazek
+          onClick={handleClick} // przechwytywanie kliknięcia także na input, jeśli jest potrzebne
+        />
         <img
-          style={{ width: "17px", height: "17px" }}
-          src={(cutlery && On) || Off}
-          alt="checkbox"
+          style={{ width: "17px", height: "17px", cursor: "pointer" }}
+          src={currentValue ? On : Off}
+          alt="Cutlery toggle"
         />
       </CutlerySelect>
     </CutleryContainer>
