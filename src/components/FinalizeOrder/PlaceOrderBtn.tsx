@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -23,9 +24,10 @@ const Button = styled.button`
 `;
 
 const PlaceOrderBtn = () => {
+  const navigate = useNavigate();
   return (
     <ButtonContainer>
-      <Button>PLACE ORDER</Button>
+      <Button onClick={() => navigate("/success")}>PLACE ORDER</Button>
     </ButtonContainer>
   );
 };
