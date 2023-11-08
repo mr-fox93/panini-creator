@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import StartAnimationScreen from "./pages/StartAnimationScreen";
 import BaseForm from "./components/BaseForm/BaseForm";
+import SuccesAnimationScreen from "./pages/SuccesAnimationScreen";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<StartAnimationScreen />} />
         <Route path="/home" element={<BaseForm />} />
+        <Route path="/success" element={<SuccesAnimationScreen />} />
       </Routes>
     </BrowserRouter>
   );

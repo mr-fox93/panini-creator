@@ -2,6 +2,8 @@ import { styled } from "styled-components";
 import { useState } from "react";
 import On from "../../arrows/On.svg";
 import Off from "../../arrows/Off.svg";
+import { useFormContext } from "react-hook-form";
+import { z } from "zod";
 
 const NapkinsContainer = styled.div`
   display: flex;
@@ -29,21 +31,31 @@ const ItemName = styled.p`
   margin-right: 20px;
 `;
 
+export const napkinsSchema = z.boolean();
+
 const Napkins = () => {
-  const [napkins, setNapkins] = useState<boolean>(false);
+  //const [napkins, setNapkins] = useState<boolean>(false);
+  const { register, setValue, watch } = useFormContext();
+  const curentValue = watch("napkins");
 
   const handleClick = () => {
-    setNapkins(!napkins);
+    setValue("napkins", !curentValue);
   };
 
   return (
     <NapkinsContainer>
       <Header>Napkins</Header>
-      <NapkinsSelect onClick={() => handleClick()}>
+      <NapkinsSelect onClick={handleClick}>
         <ItemName>ADD TO ORDER</ItemName>
+        <input
+          onClick={handleClick}
+          {...register("napkins")}
+          type="checkbox"
+          style={{ display: "none" }}
+        />
         <img
           style={{ width: "17px", height: "17px" }}
-          src={(napkins && On) || Off}
+          src={curentValue ? On : Off}
           alt="checkbox"
         />
       </NapkinsSelect>

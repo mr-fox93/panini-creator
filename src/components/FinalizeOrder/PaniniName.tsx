@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { z } from "zod";
 
 const PaniniNameContainer = styled.div`
   display: flex;
@@ -26,12 +28,16 @@ const CustomInput = styled.input`
   }
 `;
 
+export const paniniNameSchema = z.string().max(35);
+
 const PaniniName = () => {
   const [sandwichName, setSandwichName] = useState<string>("");
+  const { register } = useFormContext();
   return (
     <PaniniNameContainer>
       <Header>Name panini</Header>
       <CustomInput
+        {...register("sandwichName")}
         onChange={(e) => setSandwichName(e.target.value)}
         placeholder="eg. Salami Panini"
       />{" "}
