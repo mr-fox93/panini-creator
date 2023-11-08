@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import PaniniName from "./PaniniName";
+import Cutlery from "./Cutlery";
+import Napkins from "./Napkins";
+import PlaceOrderBtn from "./PlaceOrderBtn";
+import StartAgain from "./StartAgainBtn";
 
 export const Container = styled.div`
   display: flex;
@@ -31,6 +36,14 @@ const FinalizeOrder = () => {
     <Container>
       <Header>FINALIZE ORDER</Header>
       <Bar />
+      <PaniniName />
+      <Bar />
+      <Cutlery />
+      <Bar />
+      <Napkins />
+      <Bar />
+      <PlaceOrderBtn />
+      <StartAgain />
     </Container>
   );
 };
