@@ -26,6 +26,8 @@ import { paniniNameSchema } from "../FinalizeOrder/PaniniName";
 import { cuterlySchema } from "../FinalizeOrder/Cutlery";
 import { napkinsSchema } from "../FinalizeOrder/Napkins";
 import { toppingSchema } from "../ConfigureExtras/Topping";
+import { servingSchema } from "../ConfigureExtras/Serving";
+import { spreadsSchema } from "../ConfigureExtras/Spreads";
 
 interface SandwichPayload {
   sandwichName: string; // Max. 35 characters
@@ -63,8 +65,8 @@ interface SandwichPayload {
   // };
   extras: {
     //   egg: Array<"FRIED EGG" | "OMELET" | "SCRAMBLED EGG">;
-    //   spreads: Array<"BUTTER" | "HUMMUS" | "GUACAMOLE">;
-    //   serving: "COLD" | "WARM" | "GRILLED";
+    spreads: Array<"BUTTER" | "HUMMUS" | "GUACAMOLE">;
+    serving: "COLD" | "WARM" | "GRILLED";
     topping: "SESAME" | null;
   };
 }
@@ -92,6 +94,8 @@ const sandwichSchema = z.object({
   }),
   extras: z.object({
     topping: toppingSchema,
+    serving: servingSchema,
+    spreads: spreadsSchema,
   }),
 });
 

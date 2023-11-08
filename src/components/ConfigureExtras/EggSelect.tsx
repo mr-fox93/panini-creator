@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import SwichOn from "../../arrows/SwichOn.svg";
 import SwichOff from "../../arrows/SwichOff.svg";
+import Minus from "../../arrows/Minus.svg";
 import { eggVariants } from "../../data/egg";
 
 interface DropdownContainerProps {
