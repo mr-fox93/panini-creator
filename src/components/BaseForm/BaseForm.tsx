@@ -13,7 +13,7 @@ import {
 import CheeseSelect, { cheeseSchema } from "../CheeseSelect";
 import BreadCarouseSelect, { breadSchema } from "../BreadCarouseSelect";
 import MeatSelect from "../MeatSelect";
-import DressingCarousel from "../DressingCarousel";
+import DressingCarousel, { dressingSchema } from "../DressingCarousel";
 import VegetablesOptions, { vegetablesSchema } from "../VegetablesOptions";
 import styled from "styled-components";
 import Dices from "../../arrows/Dices.svg";
@@ -28,6 +28,7 @@ import { napkinsSchema } from "../FinalizeOrder/Napkins";
 import { toppingSchema } from "../ConfigureExtras/Topping";
 import { servingSchema } from "../ConfigureExtras/Serving";
 import { spreadsSchema } from "../ConfigureExtras/Spreads";
+import { useNavigate } from "react-router-dom";
 
 interface SandwichPayload {
   sandwichName: string; // Max. 35 characters
@@ -36,6 +37,7 @@ interface SandwichPayload {
   base: {
     bread: "FULL GRAIN" | "WHEAT";
     cheese: Array<"MOZZARELLA" | "STRACIATELLA" | "EDAM" | "GOUDA">;
+    dressing: Array<"OLIVE OIL" | "HONEY_MUSTARD" | "RANCH" | "MAYO">;
     vegetables: Array<
       | "SALAD"
       | "TOMATO"
@@ -83,6 +85,30 @@ const MainHeader = styled.div`
   transform: translateX(-50%);
 `;
 
+////
+
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 468px;
+  height: 69px;
+  margin-top: 50px;
+`;
+
+const Button = styled.button`
+  width: 468px;
+  height: 46px;
+  background: black;
+  border: none;
+  color: white;
+  transition: all 0.2s ease;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`;
+
 const sandwichSchema = z.object({
   sandwichName: paniniNameSchema,
   cutlery: cuterlySchema,
@@ -91,6 +117,7 @@ const sandwichSchema = z.object({
     bread: breadSchema,
     cheese: cheeseSchema,
     vegetables: vegetablesSchema,
+    dressing: dressingSchema,
   }),
   extras: z.object({
     topping: toppingSchema,
@@ -100,6 +127,7 @@ const sandwichSchema = z.object({
 });
 
 const BaseForm = () => {
+  const navigate = useNavigate();
   const methods = useForm<SandwichPayload>({
     resolver: zodResolver(sandwichSchema),
     defaultValues: {
@@ -114,6 +142,7 @@ const BaseForm = () => {
 
   const onSubmit = (data: SandwichPayload) => {
     console.log(data);
+    navigate("/success");
   };
 
   return (
@@ -153,7 +182,10 @@ const BaseForm = () => {
           </Container>
           <ConfigureExtras />
           <FinalizeOrder />
-          <button type="submit">testing</button>
+          {/* <button type="submit">testing</button> */}
+          <ButtonContainer>
+            <Button type="submit">PLACE ORDER</Button>
+          </ButtonContainer>
         </form>
       </FormProvider>
     </>
