@@ -1,6 +1,8 @@
 import { vegetableVariant } from "../data/vegetable";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { z } from "zod";
+import { useFormContext } from "react-hook-form";
 
 interface ButtonProps {
   isSelected: boolean;
@@ -24,23 +26,25 @@ const Button = styled.button<ButtonProps>`
   height: 38px;
   border: ${(props) => (props.isSelected ? "1px solid black" : "none")};
 `;
+//
+const vegetableArray = z.enum(vegetableVariant as [string, ...string[]]);
+export const vegetablesSchema = z.array(vegetableArray).optional();
+//
 
 const VegetablesOptions = () => {
   const [vegetableArray, setVegetableArray] = useState<string[]>([]);
+  const { setValue } = useFormContext();
 
   const handleVegetableClick = (item: string) => {
     setVegetableArray((prevSelected) => {
-      if (prevSelected.includes(item)) {
-        return prevSelected.filter((x) => x !== item);
-      } else {
-        return [...prevSelected, item];
-      }
+      const newVege = prevSelected.includes(item)
+        ? prevSelected.filter((x) => x !== item)
+        : [...prevSelected, item];
+      setValue("base.vegetables", newVege);
+      return newVege;
     });
   };
 
-  useEffect(() => {
-    console.log(vegetableArray);
-  }, [vegetableArray]);
   return (
     <>
       <p>Vegetables</p>
@@ -48,6 +52,7 @@ const VegetablesOptions = () => {
         {vegetableVariant.map((item) => (
           <Button
             key={item}
+            type="button"
             isSelected={vegetableArray.includes(item)}
             onClick={() => handleVegetableClick(item)}
           >

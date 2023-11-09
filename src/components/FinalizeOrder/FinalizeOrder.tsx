@@ -2,7 +2,7 @@ import styled from "styled-components";
 import PaniniName from "./PaniniName";
 import Cutlery from "./Cutlery";
 import Napkins from "./Napkins";
-import PlaceOrderBtn from "./PlaceOrderBtn";
+//import PlaceOrderBtn from "./PlaceOrderBtn";
 import StartAgain from "./StartAgainBtn";
 
 export const Container = styled.div`
@@ -42,7 +42,7 @@ const FinalizeOrder = () => {
       <Bar />
       <Napkins />
       <Bar />
-      <PlaceOrderBtn />
+      {/* <PlaceOrderBtn /> */}
       <StartAgain />
     </Container>
   );

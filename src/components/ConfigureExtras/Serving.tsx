@@ -3,6 +3,8 @@ import { servingVariant } from "../../data/serving";
 import CircleOff from "../../arrows/CircleOff.svg";
 import CircleOn from "../../arrows/CircleOn.svg";
 import { useState, useEffect } from "react";
+import { z } from "zod";
+import { useFormContext } from "react-hook-form";
 
 const ServingComponent = styled.div`
   width: 468px;
@@ -44,8 +46,11 @@ const ItemName = styled.p`
   margin-left: 7px;
 `;
 
+export const servingSchema = z.string().optional();
+
 const Serving = () => {
   const [servingArray, setServingArray] = useState<string>("");
+  const { setValue } = useFormContext();
 
   const handleAddServing = (item: string) => {
     setServingArray(item);
@@ -53,6 +58,7 @@ const Serving = () => {
 
   useEffect(() => {
     console.log(servingArray);
+    setValue("extras.serving", servingArray);
   }, [servingArray]);
 
   return (

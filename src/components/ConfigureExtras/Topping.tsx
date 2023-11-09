@@ -3,6 +3,8 @@ import { toppingVariant } from "../../data/topping";
 import { useState, useEffect } from "react";
 import On from "../../arrows/On.svg";
 import Off from "../../arrows/Off.svg";
+import { z } from "zod";
+import { useFormContext } from "react-hook-form";
 
 const ToppingContainer = styled.div`
   display: flex;
@@ -30,19 +32,18 @@ const ItemName = styled.p`
   margin-right: 20px;
 `;
 
+export const toppingSchema = z
+  .union([z.literal("SESAME"), z.literal(null)])
+  .optional();
+
 const Topping = () => {
   const [topping, setTopping] = useState<string | null>(null);
-
-  useEffect(() => {
-    console.log(topping);
-  }, [topping]);
+  const { setValue } = useFormContext();
 
   const handleClick = () => {
-    if (topping === null) {
-      setTopping(toppingVariant[0]);
-    } else {
-      setTopping(null);
-    }
+    const newTopping = topping === "SESAME" ? null : "SESAME";
+    setTopping(newTopping);
+    setValue("extras.topping", newTopping);
   };
 
   return (

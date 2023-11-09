@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { spreadVariant } from "../../data/spread";
 import On from "../../arrows/On.svg";
 import Off from "../../arrows/Off.svg";
+import { z } from "zod";
+import { useFormContext } from "react-hook-form";
 
 const SpreadContainer = styled.div`
   display: flex;
@@ -41,16 +43,20 @@ const ItemName = styled.p`
   margin-right: 20px;
 `;
 
+const spreadOption = z.enum(spreadVariant as [string, ...string[]]);
+export const spreadsSchema = z.array(spreadOption).optional();
+
 const Spreads = () => {
   const [spreadsArray, setSpreadsArray] = useState<string[]>([]);
+  const { setValue } = useFormContext();
 
   const handleAddSpreadBtn = (item: string) => {
     setSpreadsArray((prevSpread) => {
-      if (prevSpread.includes(item)) {
-        return prevSpread.filter((x) => x !== item);
-      } else {
-        return [...prevSpread, item];
-      }
+      const newSpread = prevSpread.includes(item)
+        ? prevSpread.filter((x) => x !== item)
+        : [...prevSpread, item];
+      setValue("extras.spreads", newSpread);
+      return newSpread;
     });
   };
 
