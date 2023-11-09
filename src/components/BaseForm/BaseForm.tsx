@@ -31,12 +31,13 @@ import { spreadsSchema } from "../ConfigureExtras/Spreads";
 import { useNavigate } from "react-router-dom";
 
 interface SandwichPayload {
-  sandwichName: string; // Max. 35 characters
+  sandwichName: string;
   cutlery: boolean;
   napkins: boolean;
   base: {
     bread: "FULL GRAIN" | "WHEAT";
     cheese: Array<"MOZZARELLA" | "STRACIATELLA" | "EDAM" | "GOUDA">;
+    meat: Array<"SALAMI" | "HAM" | "BACON" | "CHICKEN">;
     dressing: Array<"OLIVE OIL" | "HONEY_MUSTARD" | "RANCH" | "MAYO">;
     vegetables: Array<
       | "SALAD"
@@ -50,23 +51,8 @@ interface SandwichPayload {
       | "CUCUMBER"
     >;
   };
-
-  //   meat: Array<"SALAMI" | "HAM" | "BACON" | "CHICKEN">;
-  //   dressing: Array<"OLIVE OIL" | "HONEY_MUSTARD" | "RANCH" | "MAYO">;
-  //   vegetables: Array<
-  //     | "SALAD"
-  //     | "TOMATO"
-  //     | "OBERGINE"
-  //     | "BEETROOT"
-  //     | "PICKLES"
-  //     | "ONION"
-  //     | "PEPPER"
-  //     | "ASPARAGUS"
-  //     | "CUCUMBER"
-  //   >;
-  // };
   extras: {
-    //   egg: Array<"FRIED EGG" | "OMELET" | "SCRAMBLED EGG">;
+    egg: Array<"FRIED EGG" | "OMELET" | "SCRAMBLED EGG">;
     spreads: Array<"BUTTER" | "HUMMUS" | "GUACAMOLE">;
     serving: "COLD" | "WARM" | "GRILLED";
     topping: "SESAME" | null;
@@ -84,8 +70,6 @@ const MainHeader = styled.div`
   left: 50%;
   transform: translateX(-50%);
 `;
-
-////
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -182,7 +166,7 @@ const BaseForm = () => {
           </Container>
           <ConfigureExtras />
           <FinalizeOrder />
-          {/* <button type="submit">testing</button> */}
+
           <ButtonContainer>
             <Button type="submit">PLACE ORDER</Button>
           </ButtonContainer>
