@@ -53,7 +53,8 @@ export const Meat = styled.div`
 
 export const Dressing = styled.div`
   width: 469px;
-  height: 79px;
+  min-height: 79px;
+  height: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
