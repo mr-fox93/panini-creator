@@ -19,7 +19,7 @@ import styled from "styled-components";
 import Dices from "../../arrows/Dices.svg";
 import ConfigureExtras from "../ConfigureExtras/ConfigureExtras";
 import FinalizeOrder from "../FinalizeOrder/FinalizeOrder";
-import { useForm, FormProvider } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { paniniNameSchema } from "../FinalizeOrder/PaniniName";
@@ -29,6 +29,7 @@ import { toppingSchema } from "../ConfigureExtras/Topping";
 import { servingSchema } from "../ConfigureExtras/Serving";
 import { spreadsSchema } from "../ConfigureExtras/Spreads";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 interface SandwichPayload {
   sandwichName: string;
@@ -111,6 +112,7 @@ const sandwichSchema = z.object({
 });
 
 const BaseForm = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const methods = useForm<SandwichPayload>({
     resolver: zodResolver(sandwichSchema),
@@ -124,15 +126,15 @@ const BaseForm = () => {
     },
   });
 
-  const onSubmit = (data: SandwichPayload) => {
+  const onSubmit = methods.handleSubmit((data: SandwichPayload) => {
     console.log(data);
     navigate("/success");
-  };
+  });
 
   return (
     <>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={onSubmit}>
           <MainHeader>
             <PaniniName>Panini Creator</PaniniName>
             <RandomizedButton>
@@ -166,10 +168,6 @@ const BaseForm = () => {
           </Container>
           <ConfigureExtras />
           <FinalizeOrder />
-
-          <ButtonContainer>
-            <Button type="submit">PLACE ORDER</Button>
-          </ButtonContainer>
         </form>
       </FormProvider>
     </>
