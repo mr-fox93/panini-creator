@@ -126,11 +126,6 @@ const BaseForm = () => {
     },
   });
 
-  // const onSubmit = methods.handleSubmit((data: SandwichPayload) => {
-  //   console.log(data);
-  //   navigate("/success");
-  // });
-
   const onSubmit = methods.handleSubmit((data: SandwichPayload) => {
     console.log(data);
 
@@ -150,7 +145,7 @@ const BaseForm = () => {
       })
       .then((data) => {
         console.log("Success:", data);
-        navigate("/success", { state: { imageUrl: data.imageUrl } });
+        navigate("/success");
       })
       .catch((error) => {
         console.error("Error:", error);
