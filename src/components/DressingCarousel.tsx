@@ -7,6 +7,8 @@ import RightArrowImage from "../arrows/Vector3.svg";
 import SwichOn from "../arrows/SwichOn.svg";
 import SwichOff from "../arrows/SwichOff.svg";
 import Add from "../arrows/PlusHover.svg";
+import Minus from "../arrows/Minus.svg";
+
 import { dressingVariants } from "../data/dressing";
 
 interface CarouselWrapProps {
@@ -38,7 +40,19 @@ const CarouselCaontainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 1rem;
+`;
+
+const RemoveButton = styled.img`
+  cursor: pointer;
+  margin-left: 10px;
+  width: 15px;
+`;
+
+const WrapSingleCarousel = styled.div`
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 `;
 
 export const dressingSchema = z.array(z.string()).optional().nullable();
@@ -80,6 +94,13 @@ const DressingCarousel: React.FC = () => {
     updateDressing(carouselIndex, newIndex);
   };
 
+  const removeCarousel = (carouselIndex: number) => {
+    const filterDeleted = carousels.filter(
+      (_, index) => index !== carouselIndex
+    );
+    setCarousels(filterDeleted);
+  };
+
   useEffect(() => {
     if (isVisible) {
       setValue(
@@ -109,23 +130,34 @@ const DressingCarousel: React.FC = () => {
       </div>
       <CarouselCaontainer>
         {carousels.map((carousel, index) => (
-          <CarouselWrap key={index} isVisible={isVisible}>
-            <img
-              onClick={() => prevDressing(index)}
-              style={{ cursor: "pointer" }}
-              src={RightArrowImage}
-              alt="Left Arrow"
-            />
-            <BreadAndLogoWrapper>
-              {dressingVariants[carousel.index]}
-            </BreadAndLogoWrapper>
-            <img
-              onClick={() => nextDressing(index)}
-              style={{ cursor: "pointer" }}
-              src={LeftArrowImage}
-              alt="Right Arrow"
-            />
-          </CarouselWrap>
+          <>
+            <WrapSingleCarousel>
+              {index !== 0 && (
+                <RemoveButton
+                  onClick={() => removeCarousel(index)}
+                  src={Minus}
+                  alt="Remove"
+                />
+              )}
+              <CarouselWrap key={index} isVisible={isVisible}>
+                <img
+                  onClick={() => prevDressing(index)}
+                  style={{ cursor: "pointer" }}
+                  src={RightArrowImage}
+                  alt="Left Arrow"
+                />
+                <BreadAndLogoWrapper>
+                  {dressingVariants[carousel.index]}
+                </BreadAndLogoWrapper>
+                <img
+                  onClick={() => nextDressing(index)}
+                  style={{ cursor: "pointer" }}
+                  src={LeftArrowImage}
+                  alt="Right Arrow"
+                />
+              </CarouselWrap>
+            </WrapSingleCarousel>
+          </>
         ))}
       </CarouselCaontainer>
     </>
