@@ -126,9 +126,35 @@ const BaseForm = () => {
     },
   });
 
+  // const onSubmit = methods.handleSubmit((data: SandwichPayload) => {
+  //   console.log(data);
+  //   navigate("/success");
+  // });
+
   const onSubmit = methods.handleSubmit((data: SandwichPayload) => {
     console.log(data);
-    navigate("/success");
+
+    fetch("https://training.nerdbord.io/api/v1/panini-creator/order", {
+      method: "POST",
+      headers: {
+        Authorization: "secret_token",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
+        navigate("/success", { state: { imageUrl: data.imageUrl } });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   });
 
   return (
