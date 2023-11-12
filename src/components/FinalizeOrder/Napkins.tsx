@@ -31,10 +31,9 @@ const ItemName = styled.p`
   margin-right: 20px;
 `;
 
-export const napkinsSchema = z.boolean();
+export const napkinsSchema = z.boolean().optional();
 
 const Napkins = () => {
-  //const [napkins, setNapkins] = useState<boolean>(false);
   const { register, setValue, watch } = useFormContext();
   const curentValue = watch("napkins");
 

@@ -61,6 +61,7 @@ const DropdownsContainer = styled.div<DropdownContainerProps>`
   margin-bottom: 20px;
   margin-top: 20px;
   visibility: ${(props) => (props.isVisible ? "visible" : "none")};
+  width: 250px;
 `;
 
 const DropdownWithRemove = styled.div`
@@ -72,7 +73,6 @@ const DropdownWithRemove = styled.div`
 
 const RemoveButton = styled.img`
   cursor: pointer;
-  margin-left: 10px;
 `;
 
 export const cheeseSchema = z.array(

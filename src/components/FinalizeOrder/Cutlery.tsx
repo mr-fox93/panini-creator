@@ -31,7 +31,7 @@ const ItemName = styled.p`
   margin-right: 20px;
 `;
 
-export const cuterlySchema = z.boolean();
+export const cuterlySchema = z.boolean().optional();
 
 const Cutlery = () => {
   const { register, setValue, watch } = useFormContext();
@@ -49,8 +49,8 @@ const Cutlery = () => {
         <input
           type="checkbox"
           {...register("cutlery")}
-          style={{ display: "none" }} // ukryj prawdziwy checkbox, aby móc pokazać obrazek
-          onClick={handleClick} // przechwytywanie kliknięcia także na input, jeśli jest potrzebne
+          style={{ display: "none" }}
+          onClick={handleClick}
         />
         <img
           style={{ width: "17px", height: "17px", cursor: "pointer" }}

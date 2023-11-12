@@ -12,7 +12,7 @@ import {
 } from "./BaseForm.styles";
 import CheeseSelect, { cheeseSchema } from "../CheeseSelect";
 import BreadCarouseSelect, { breadSchema } from "../BreadCarouseSelect";
-import MeatSelect from "../MeatSelect";
+import MeatSelect, { meatSchema } from "../MeatSelect";
 import DressingCarousel, { dressingSchema } from "../DressingCarousel";
 import VegetablesOptions, { vegetablesSchema } from "../VegetablesOptions";
 import styled from "styled-components";
@@ -30,6 +30,7 @@ import { servingSchema } from "../ConfigureExtras/Serving";
 import { spreadsSchema } from "../ConfigureExtras/Spreads";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import { eggSchema } from "../ConfigureExtras/EggSelect";
 
 interface SandwichPayload {
   sandwichName: string;
@@ -103,11 +104,13 @@ const sandwichSchema = z.object({
     cheese: cheeseSchema,
     vegetables: vegetablesSchema,
     dressing: dressingSchema,
+    meat: meatSchema,
   }),
   extras: z.object({
     topping: toppingSchema,
     serving: servingSchema,
     spreads: spreadsSchema,
+    egg: eggSchema,
   }),
 });
 
@@ -119,9 +122,13 @@ const BaseForm = () => {
     defaultValues: {
       base: {
         cheese: ["EDAM"],
+        meat: ["HAM"],
+        vegetables: [],
       },
       extras: {
         topping: null,
+        egg: ["FRIED EGG"],
+        spreads: [],
       },
     },
   });
@@ -145,6 +152,9 @@ const BaseForm = () => {
       })
       .then((data) => {
         console.log("Success:", data);
+        if (data.imageUrl) {
+          window.open(data.imageUrl, "_blank");
+        }
         navigate("/success");
       })
       .catch((error) => {

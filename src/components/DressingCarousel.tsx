@@ -40,6 +40,8 @@ const CarouselCaontainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 `;
 
 const RemoveButton = styled.img`
