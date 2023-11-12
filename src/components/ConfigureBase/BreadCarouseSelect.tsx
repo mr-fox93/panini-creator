@@ -1,7 +1,7 @@
-import LeftArrowImage from "../arrows/Vector4.svg";
-import RightArrowImage from "../arrows/Vector3.svg";
-import Grain from "../arrows/Grain.svg";
-import Wheat from "../arrows/Wheat.svg";
+import LeftArrowImage from "../../arrows/Vector4.svg";
+import RightArrowImage from "../../arrows/Vector3.svg";
+import Grain from "../../arrows/Grain.svg";
+import Wheat from "../../arrows/Wheat.svg";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";

@@ -32,7 +32,8 @@ export const Bar = styled.div`
 
 export const Egg = styled.div`
   width: 469px;
-  height: 79px;
+  min-height: 79px;
+  height: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;

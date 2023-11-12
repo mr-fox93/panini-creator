@@ -10,11 +10,17 @@ import {
   PaniniName,
   RandomizedButton,
 } from "./BaseForm.styles";
-import CheeseSelect, { cheeseSchema } from "../CheeseSelect";
-import BreadCarouseSelect, { breadSchema } from "../BreadCarouseSelect";
-import MeatSelect, { meatSchema } from "../MeatSelect";
-import DressingCarousel, { dressingSchema } from "../DressingCarousel";
-import VegetablesOptions, { vegetablesSchema } from "../VegetablesOptions";
+import CheeseSelect, { cheeseSchema } from "../ConfigureBase/CheeseSelect";
+import BreadCarouseSelect, {
+  breadSchema,
+} from "../ConfigureBase/BreadCarouseSelect";
+import MeatSelect, { meatSchema } from "../ConfigureBase/MeatSelect";
+import DressingCarousel, {
+  dressingSchema,
+} from "../ConfigureBase/DressingCarousel";
+import VegetablesOptions, {
+  vegetablesSchema,
+} from "../ConfigureBase/VegetablesOptions";
 import styled from "styled-components";
 import Dices from "../../arrows/Dices.svg";
 import ConfigureExtras from "../ConfigureExtras/ConfigureExtras";
@@ -71,28 +77,6 @@ const MainHeader = styled.div`
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 468px;
-  height: 69px;
-  margin-top: 50px;
-`;
-
-const Button = styled.button`
-  width: 468px;
-  height: 46px;
-  background: black;
-  border: none;
-  color: white;
-  transition: all 0.2s ease;
-
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
 `;
 
 const sandwichSchema = z.object({

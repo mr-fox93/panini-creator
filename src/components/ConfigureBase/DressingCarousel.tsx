@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
 import { z } from "zod";
-import LeftArrowImage from "../arrows/Vector4.svg";
-import RightArrowImage from "../arrows/Vector3.svg";
-import SwichOn from "../arrows/SwichOn.svg";
-import SwichOff from "../arrows/SwichOff.svg";
-import Add from "../arrows/PlusHover.svg";
-import Minus from "../arrows/Minus.svg";
+import LeftArrowImage from "../../arrows/Vector4.svg";
+import RightArrowImage from "../../arrows/Vector3.svg";
+import SwichOn from "../../arrows/SwichOn.svg";
+import SwichOff from "../../arrows/SwichOff.svg";
+import Add from "../../arrows/PlusHover.svg";
+import Minus from "../../arrows/Minus.svg";
 
-import { dressingVariants } from "../data/dressing";
+import { dressingVariants } from "../../data/dressing";
 
 interface CarouselWrapProps {
   isVisible: boolean;
