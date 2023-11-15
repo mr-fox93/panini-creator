@@ -1,4 +1,4 @@
-import { vegetableVariant } from "../data/vegetable";
+import { vegetableVariant } from "../../data/vegetable";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { z } from "zod";
@@ -26,10 +26,9 @@ const Button = styled.button<ButtonProps>`
   height: 38px;
   border: ${(props) => (props.isSelected ? "1px solid black" : "none")};
 `;
-//
+
 const vegetableArray = z.enum(vegetableVariant as [string, ...string[]]);
 export const vegetablesSchema = z.array(vegetableArray).optional();
-//
 
 const VegetablesOptions = () => {
   const [vegetableArray, setVegetableArray] = useState<string[]>([]);

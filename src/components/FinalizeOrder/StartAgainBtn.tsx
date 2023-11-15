@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const ButtonContainer = styled.div`
@@ -22,9 +23,12 @@ const Button = styled.button`
 `;
 
 const StartAgain = () => {
+  const navigate = useNavigate();
   return (
     <ButtonContainer>
-      <Button>START AGAIN</Button>
+      <Button onClick={() => navigate("/")} type="button">
+        START AGAIN
+      </Button>
     </ButtonContainer>
   );
 };

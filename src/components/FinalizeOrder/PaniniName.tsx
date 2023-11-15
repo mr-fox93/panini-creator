@@ -53,7 +53,6 @@ const PaniniName = () => {
   } = useFormContext();
 
   const message = "Panini name is required";
-  // enqueueSnackbar(message, { variant: "error" });
 
   useEffect(() => {
     if (errors.sandwichName && !sandwichName) {

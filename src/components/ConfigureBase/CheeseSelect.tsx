@@ -1,10 +1,10 @@
 import { useState, Fragment } from "react";
 import styled from "styled-components";
-import SwichOn from "../arrows/SwichOn.svg";
-import SwichOff from "../arrows/SwichOff.svg";
-import Minus from "../arrows/Minus.svg";
-import Add from "../arrows/PlusHover.svg";
-import { cheeseVariants } from "../data/cheese";
+import SwichOn from "../../arrows/SwichOn.svg";
+import SwichOff from "../../arrows/SwichOff.svg";
+import Minus from "../../arrows/Minus.svg";
+import Add from "../../arrows/PlusHover.svg";
+import { cheeseVariants } from "../../data/cheese";
 import { z } from "zod";
 import { useFormContext } from "react-hook-form";
 
@@ -12,12 +12,11 @@ interface DropdownContainerProps {
   isVisible: boolean;
 }
 
-const DropdownContainer = styled.div<DropdownContainerProps>`
+const DropdownContainer = styled.div`
   width: 250px;
   height: 35px;
   margin: 0;
   position: relative;
-  visibility: ${(props) => (props.isVisible ? "visible" : "hidden")};
 `;
 
 const DropdownHeader = styled.div`
@@ -55,23 +54,25 @@ const ListItem = styled.li`
   }
 `;
 
-const DropdownsContainer = styled.div`
+const DropdownsContainer = styled.div<DropdownContainerProps>`
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
   margin-top: 20px;
+  visibility: ${(props) => (props.isVisible ? "visible" : "none")};
+  width: 250px;
 `;
 
 const DropdownWithRemove = styled.div`
+  gap: 10px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-end;
 `;
 
 const RemoveButton = styled.img`
   cursor: pointer;
-  margin-left: 10px;
 `;
 
 export const cheeseSchema = z.array(
@@ -84,16 +85,27 @@ export const cheeseSchema = z.array(
 );
 
 const CustomDropdown = () => {
+  const [isVisible, setIsVisible] = useState(true);
+
   const [selectedOptions, setSelectedOptions] = useState([cheeseVariants[0]]);
   const [isOpen, setIsOpen] = useState([false]);
-  const [isVisible, setIsVisible] = useState(true);
   const { setValue } = useFormContext();
 
   const toggling = (index: number) => {
     setIsOpen(isOpen.map((open, i) => (i === index ? !open : false)));
   };
 
-  const visible = () => setIsVisible(!isVisible);
+  const visible = () => {
+    const newVisibility = !isVisible;
+    setIsVisible(newVisibility);
+    if (newVisibility) {
+      setSelectedOptions([cheeseVariants[0]]);
+      setIsOpen([false]);
+    } else {
+      setSelectedOptions([]);
+      setValue(`base.cheese`, [], { shouldValidate: true });
+    }
+  };
 
   const onOptionClicked = (value: string, index: number) => () => {
     const newOptions = [...selectedOptions];
@@ -121,7 +133,7 @@ const CustomDropdown = () => {
   };
 
   return (
-    <Fragment>
+    <>
       <p>Cheese</p>
       <div>
         <img
@@ -132,7 +144,7 @@ const CustomDropdown = () => {
         />
         <img onClick={addAnotherDropdown} src={Add} alt="Add" />
       </div>
-      <DropdownsContainer>
+      <DropdownsContainer isVisible={isVisible}>
         {selectedOptions.map((option, index) => (
           <DropdownWithRemove key={index}>
             {index !== 0 && (
@@ -142,7 +154,7 @@ const CustomDropdown = () => {
                 onClick={() => removeDropdown(index)}
               />
             )}
-            <DropdownContainer isVisible={true}>
+            <DropdownContainer>
               <DropdownHeader onClick={() => toggling(index)}>
                 {option}
               </DropdownHeader>
@@ -164,7 +176,7 @@ const CustomDropdown = () => {
           </DropdownWithRemove>
         ))}
       </DropdownsContainer>
-    </Fragment>
+    </>
   );
 };
 

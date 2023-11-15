@@ -10,16 +10,22 @@ import {
   PaniniName,
   RandomizedButton,
 } from "./BaseForm.styles";
-import CheeseSelect, { cheeseSchema } from "../CheeseSelect";
-import BreadCarouseSelect, { breadSchema } from "../BreadCarouseSelect";
-import MeatSelect from "../MeatSelect";
-import DressingCarousel, { dressingSchema } from "../DressingCarousel";
-import VegetablesOptions, { vegetablesSchema } from "../VegetablesOptions";
+import CheeseSelect, { cheeseSchema } from "../ConfigureBase/CheeseSelect";
+import BreadCarouseSelect, {
+  breadSchema,
+} from "../ConfigureBase/BreadCarouseSelect";
+import MeatSelect, { meatSchema } from "../ConfigureBase/MeatSelect";
+import DressingCarousel, {
+  dressingSchema,
+} from "../ConfigureBase/DressingCarousel";
+import VegetablesOptions, {
+  vegetablesSchema,
+} from "../ConfigureBase/VegetablesOptions";
 import styled from "styled-components";
 import Dices from "../../arrows/Dices.svg";
 import ConfigureExtras from "../ConfigureExtras/ConfigureExtras";
 import FinalizeOrder from "../FinalizeOrder/FinalizeOrder";
-import { useForm, FormProvider } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { paniniNameSchema } from "../FinalizeOrder/PaniniName";
@@ -29,6 +35,8 @@ import { toppingSchema } from "../ConfigureExtras/Topping";
 import { servingSchema } from "../ConfigureExtras/Serving";
 import { spreadsSchema } from "../ConfigureExtras/Spreads";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { eggSchema } from "../ConfigureExtras/EggSelect";
 
 interface SandwichPayload {
   sandwichName: string;
@@ -71,28 +79,6 @@ const MainHeader = styled.div`
   transform: translateX(-50%);
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 468px;
-  height: 69px;
-  margin-top: 50px;
-`;
-
-const Button = styled.button`
-  width: 468px;
-  height: 46px;
-  background: black;
-  border: none;
-  color: white;
-  transition: all 0.2s ease;
-
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`;
-
 const sandwichSchema = z.object({
   sandwichName: paniniNameSchema,
   cutlery: cuterlySchema,
@@ -102,37 +88,68 @@ const sandwichSchema = z.object({
     cheese: cheeseSchema,
     vegetables: vegetablesSchema,
     dressing: dressingSchema,
+    meat: meatSchema,
   }),
   extras: z.object({
     topping: toppingSchema,
     serving: servingSchema,
     spreads: spreadsSchema,
+    egg: eggSchema,
   }),
 });
 
 const BaseForm = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const methods = useForm<SandwichPayload>({
     resolver: zodResolver(sandwichSchema),
     defaultValues: {
       base: {
         cheese: ["EDAM"],
+        meat: ["HAM"],
+        vegetables: [],
       },
       extras: {
         topping: null,
+        egg: ["FRIED EGG"],
+        spreads: [],
       },
     },
   });
 
-  const onSubmit = (data: SandwichPayload) => {
+  const onSubmit = methods.handleSubmit((data: SandwichPayload) => {
     console.log(data);
-    navigate("/success");
-  };
+
+    fetch("https://training.nerdbord.io/api/v1/panini-creator/order", {
+      method: "POST",
+      headers: {
+        Authorization: "secret_token",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
+        if (data.imageUrl) {
+          window.open(data.imageUrl, "_blank");
+        }
+        navigate("/success");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
 
   return (
     <>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={onSubmit}>
           <MainHeader>
             <PaniniName>Panini Creator</PaniniName>
             <RandomizedButton>
@@ -166,10 +183,6 @@ const BaseForm = () => {
           </Container>
           <ConfigureExtras />
           <FinalizeOrder />
-
-          <ButtonContainer>
-            <Button type="submit">PLACE ORDER</Button>
-          </ButtonContainer>
         </form>
       </FormProvider>
     </>
