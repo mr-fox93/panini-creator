@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { z } from "zod";
 import { enqueueSnackbar } from "notistack";
+import { useStore } from "../../store";
 
 interface CustomProps {
   hasError?: boolean;
@@ -46,7 +47,8 @@ export const paniniNameSchema = z
   .max(35);
 
 const PaniniName = () => {
-  const [sandwichName, setSandwichName] = useState<string>("");
+  //const [sandwichName, setSandwichName] = useState<string>("");
+  const { sandwichName, setSandwichName } = useStore();
   const {
     register,
     formState: { errors },
@@ -65,6 +67,7 @@ const PaniniName = () => {
       <Header>Name panini</Header>
       <InputContainer>
         <CustomInput
+          value={sandwichName}
           hasError={Boolean(errors.sandwichName)}
           {...register("sandwichName")}
           onChange={(e) => setSandwichName(e.target.value)}

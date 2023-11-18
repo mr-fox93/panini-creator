@@ -37,6 +37,7 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { eggSchema } from "../ConfigureExtras/EggSelect";
 import RandomizedButton from "./RandomizedButton";
+import VegeOptions from "./VegeOptions";
 
 interface SandwichPayload {
   sandwichName: string;
@@ -156,7 +157,8 @@ const BaseForm = () => {
               <img src={Dices} alt="randomize panii" />
               <p>RANDOMIZED PANINI</p>
             </RandomizedButton> */}
-            <RandomizedButton />
+            {/* <RandomizedButton /> */}
+            <VegeOptions />
           </MainHeader>
           <Container>
             <Header>CONFIGURE BASE</Header>

@@ -1,3 +1,4 @@
+import { useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -24,9 +25,16 @@ const Button = styled.button`
 
 const StartAgain = () => {
   const navigate = useNavigate();
+  const { reset } = useFormContext();
+
+  const handleStartAgain = () => {
+    reset();
+    navigate("/");
+    window.location.reload();
+  };
   return (
     <ButtonContainer>
-      <Button onClick={() => navigate("/")} type="button">
+      <Button onClick={() => handleStartAgain()} type="button">
         START AGAIN
       </Button>
     </ButtonContainer>

@@ -20,43 +20,22 @@ export const RandomizedButton = styled.button`
   cursor: pointer;
 `;
 
-const Randomize = () => {
+const VegeOptions = () => {
   const {
     setServingArray,
-    servingArray,
-    currentIndex,
     setCurrentIndex,
-    selectedOptions,
     setSelectedOptions,
-    meatOptions,
     setMeatOptions,
     carousels,
     setCarousels,
-    vegetableArray,
     setVegetableArray,
     setIsVisible,
     isVisible,
+    setSandwichName,
   } = useStore();
-  const serving = servingVariant;
-  const bread = breadVariants;
-  const cheese = cheeseVariants;
-  const meat = meatVariants;
-  const dressing = dressingVariants;
   const vegetables = vegetableVariant;
 
-  //   const randomizeCarousels = () => {
-  //     const newCarousels = carousels.map(() => {
-  //       return { index: Math.floor(Math.random() * dressingVariants.length) };
-  //     });
-  //     setCarousels(newCarousels);
-  //   };
-
   const randomizeVegetables = () => {
-    const randomVisible = Math.random() < 0.5;
-    setIsVisible(randomVisible);
-
-    if (!isVisible) return;
-
     const vegeNumbers = Math.floor(Math.random() * 9) + 1;
     const randomizedVege = [];
     for (let i = 0; i < vegeNumbers; i++) {
@@ -67,32 +46,23 @@ const Randomize = () => {
     setVegetableArray(randomizedVege);
   };
 
+  const randomizedMeat = () => {
+    setIsVisible(false);
+    //setMeatOptions([]);
+  };
+
   const randomizePanini = () => {
-    setServingArray(serving[Math.floor(Math.random() * serving.length)]);
-    setCurrentIndex(bread[Math.floor(Math.random() * bread.length)]);
-    setSelectedOptions([cheese[Math.floor(Math.random() * cheese.length)]]);
-    setMeatOptions([meat[Math.floor(Math.random() * meat.length)]]);
-    //randomizeCarousels();
+    setServingArray("WARM");
+    setCurrentIndex("FULL GRAIN");
+    setSelectedOptions(["MOZZARELLA"]);
+    randomizedMeat();
     setCarousels(
       carousels.map(() => {
         return { index: Math.floor(Math.random() * dressingVariants.length) };
       })
     );
-    // setVegetableArray([
-    //   vegetables[Math.floor(Math.random() * vegetables.length)],
-    // ]);
     randomizeVegetables();
-
-    // const numberOfCheeseSelectors = Math.floor(Math.random() * 2) + 1; // Losuje 1 lub 2
-    // const newSelectedOptions = [];
-
-    // for (let i = 0; i < numberOfCheeseSelectors; i++) {
-    //   newSelectedOptions.push(
-    //     cheese[Math.floor(Math.random() * cheese.length)]
-    //   );
-    // }
-
-    // setSelectedOptions(newSelectedOptions);
+    setSandwichName("VEGE PANINI");
   };
 
   return (
@@ -103,4 +73,4 @@ const Randomize = () => {
   );
 };
 
-export default Randomize;
+export default VegeOptions;

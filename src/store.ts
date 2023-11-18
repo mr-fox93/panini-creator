@@ -12,6 +12,12 @@ interface StoreState {
   selectedOptions: string[];
   meatOptions: string[];
   carousels: CarouselState[];
+  vegetableArray: string[];
+  isVisible: boolean;
+  sandwichName: string;
+  setSandwichName: (sandwichName: string) => void;
+  setIsVisible: (isVisible: boolean) => void;
+  setVegetableArray: (vegetableArray: string[]) => void;
   setCarousels: (carousels: CarouselState[]) => void;
   setMeatOptions: (meatOptions: string[]) => void;
   setSelectedOptions: (selectoedOptions: string[]) => void;
@@ -22,9 +28,15 @@ interface StoreState {
 export const useStore = create<StoreState>((set) => ({
   servingArray: "WARM",
   currentIndex: "FULL GRAIN",
+  vegetableArray: ["SALAD", "PEPPER"],
+  setVegetableArray: (vegetableArray) => set({ vegetableArray }),
   selectedOptions: [cheeseVariants[0]],
   meatOptions: [meatVariants[0]],
-  carousels: [{ index: 0 }],
+  isVisible: true,
+  sandwichName: "",
+  setSandwichName: (sandwichName) => set({ sandwichName }),
+  setIsVisible: (isVisible) => set({ isVisible }),
+  carousels: <CarouselState[]>[{ index: 0 }],
   setCarousels: (carousels) => set({ carousels }),
   setMeatOptions: (meatOptions) => set({ meatOptions }),
   setSelectedOptions: (selectedOptions) => set({ selectedOptions }),
