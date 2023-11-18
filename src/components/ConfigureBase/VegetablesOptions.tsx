@@ -31,7 +31,7 @@ const vegetableArray = z.enum(vegetableVariant as [string, ...string[]]);
 export const vegetablesSchema = z.array(vegetableArray).optional();
 
 const VegetablesOptions = () => {
-  const [vegetableArray, setVegetableArray] = useState<string[]>([]);
+  const [vegetableArray, setVegetableArray] = useState<string[]>(["SALAD"]);
   const { setValue } = useFormContext();
 
   const handleVegetableClick = (item: string) => {

@@ -5,6 +5,7 @@ import CircleOn from "../../arrows/CircleOn.svg";
 import { useState, useEffect } from "react";
 import { z } from "zod";
 import { useFormContext } from "react-hook-form";
+import { useStore } from "../../store";
 
 const ServingComponent = styled.div`
   width: 468px;
@@ -49,7 +50,9 @@ const ItemName = styled.p`
 export const servingSchema = z.string().optional();
 
 const Serving = () => {
-  const [servingArray, setServingArray] = useState<string>("");
+  //const [servingArray, setServingArray] = useState<string>("WARM");
+  const { servingArray, setServingArray } = useStore();
+
   const { setValue } = useFormContext();
 
   const handleAddServing = (item: string) => {

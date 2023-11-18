@@ -47,7 +47,7 @@ const spreadOption = z.enum(spreadVariant as [string, ...string[]]);
 export const spreadsSchema = z.array(spreadOption).optional();
 
 const Spreads = () => {
-  const [spreadsArray, setSpreadsArray] = useState<string[]>([]);
+  const [spreadsArray, setSpreadsArray] = useState<string[]>([""]);
   const { setValue } = useFormContext();
 
   const handleAddSpreadBtn = (item: string) => {

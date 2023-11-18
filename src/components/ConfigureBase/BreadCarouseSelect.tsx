@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { z } from "zod";
+import { useStore } from "../../store";
 
 const CarouselWrap = styled.div`
   display: flex;
@@ -26,7 +27,8 @@ const BreadAndLogoWrapper = styled.div`
 export const breadSchema = z.enum(["WHEAT", "FULL GRAIN"]);
 
 const Carousel = () => {
-  const [currentIndex, setCurrentIndex] = useState("WHEAT");
+  //const [currentIndex, setCurrentIndex] = useState("WHEAT");
+  const { currentIndex, setCurrentIndex } = useStore();
   const { register, setValue, watch } = useFormContext();
   const breadType = watch("base.bread");
 
