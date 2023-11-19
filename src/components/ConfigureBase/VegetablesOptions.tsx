@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { z } from "zod";
 import { useFormContext } from "react-hook-form";
+import { useStore } from "../../store";
 
 interface ButtonProps {
   isSelected: boolean;
@@ -31,18 +32,21 @@ const vegetableArray = z.enum(vegetableVariant as [string, ...string[]]);
 export const vegetablesSchema = z.array(vegetableArray).optional();
 
 const VegetablesOptions = () => {
-  const [vegetableArray, setVegetableArray] = useState<string[]>([]);
+  //const [vegetableArray, setVegetableArray] = useState<string[]>(["SALAD"]);
+  const { vegetableArray, setVegetableArray } = useStore();
   const { setValue } = useFormContext();
 
   const handleVegetableClick = (item: string) => {
-    setVegetableArray((prevSelected) => {
-      const newVege = prevSelected.includes(item)
-        ? prevSelected.filter((x) => x !== item)
-        : [...prevSelected, item];
-      setValue("base.vegetables", newVege);
-      return newVege;
-    });
+    const newVege = vegetableArray.includes(item)
+      ? vegetableArray.filter((vege) => vege !== item)
+      : [...vegetableArray, item];
+    setVegetableArray(newVege);
+    //setValue("base.vegetables", newVege);
   };
+
+  useEffect(() => {
+    setValue("base.vegetables", vegetableArray);
+  }, [vegetableArray]);
 
   return (
     <>

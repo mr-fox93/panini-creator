@@ -10,6 +10,7 @@ import Add from "../../arrows/PlusHover.svg";
 import Minus from "../../arrows/Minus.svg";
 
 import { dressingVariants } from "../../data/dressing";
+import { useStore } from "../../store";
 
 interface CarouselWrapProps {
   isVisible: boolean;
@@ -60,8 +61,10 @@ const WrapSingleCarousel = styled.div`
 export const dressingSchema = z.array(z.string()).optional().nullable();
 
 const DressingCarousel: React.FC = () => {
-  const [isVisible, setIsVisible] = useState<boolean>(true);
-  const [carousels, setCarousels] = useState<CarouselState[]>([{ index: 0 }]);
+  //const [isVisible, setIsVisible] = useState<boolean>(true);
+  //const [carousels, setCarousels] = useState<CarouselState[]>([{ index: 0 }]);
+  const { carousels, setCarousels, isVisible, setIsVisible } = useStore();
+
   const { setValue } = useFormContext();
 
   const visible = () => setIsVisible(!isVisible);

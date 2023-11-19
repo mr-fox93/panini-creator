@@ -5,6 +5,7 @@ import On from "../../arrows/On.svg";
 import Off from "../../arrows/Off.svg";
 import { z } from "zod";
 import { useFormContext } from "react-hook-form";
+import { useStore } from "../../store";
 
 const SpreadContainer = styled.div`
   display: flex;
@@ -47,22 +48,21 @@ const spreadOption = z.enum(spreadVariant as [string, ...string[]]);
 export const spreadsSchema = z.array(spreadOption).optional();
 
 const Spreads = () => {
-  const [spreadsArray, setSpreadsArray] = useState<string[]>([]);
+  //const [spreadsArray, setSpreadsArray] = useState<string[]>([""]);
+  const { spreadsArray, setSpreadsArray } = useStore();
   const { setValue } = useFormContext();
 
   const handleAddSpreadBtn = (item: string) => {
-    setSpreadsArray((prevSpread) => {
-      const newSpread = prevSpread.includes(item)
-        ? prevSpread.filter((x) => x !== item)
-        : [...prevSpread, item];
-      setValue("extras.spreads", newSpread);
-      return newSpread;
-    });
+    const newSpreads = spreadsArray.includes(item)
+      ? spreadsArray.filter((x) => x !== item)
+      : [...spreadsArray, item];
+    setSpreadsArray(newSpreads);
   };
 
   useEffect(() => {
-    console.log(spreadsArray);
+    setValue("extras.spreads", spreadsArray);
   }, [spreadsArray]);
+
   return (
     <SpreadContainer>
       <Header>Spreads</Header>

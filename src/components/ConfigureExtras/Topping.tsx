@@ -5,6 +5,7 @@ import On from "../../arrows/On.svg";
 import Off from "../../arrows/Off.svg";
 import { z } from "zod";
 import { useFormContext } from "react-hook-form";
+import { useStore } from "../../store";
 
 const ToppingContainer = styled.div`
   display: flex;
@@ -37,7 +38,8 @@ export const toppingSchema = z
   .optional();
 
 const Topping = () => {
-  const [topping, setTopping] = useState<string | null>(null);
+  //const [topping, setTopping] = useState<string | null>(null);
+  const { topping, setTopping } = useStore();
   const { setValue } = useFormContext();
 
   const handleClick = () => {

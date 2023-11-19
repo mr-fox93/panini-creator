@@ -7,6 +7,7 @@ import Add from "../../arrows/PlusHover.svg";
 import { meatVariants } from "../../data/meat";
 import { z } from "zod";
 import { useFormContext } from "react-hook-form";
+import { useStore } from "../../store";
 
 interface DropdownContainerProps {
   isVisible: boolean;
@@ -87,7 +88,8 @@ export const meatSchema = z.array(
 const MeatSelect = () => {
   const [isVisible, setIsVisible] = useState(true);
 
-  const [selectedOptions, setSelectedOptions] = useState([meatVariants[0]]);
+  //const [meatOptions, setMeatOptions] = useState([meatVariants[0]]);
+  const { meatOptions, setMeatOptions } = useStore();
   const [isOpen, setIsOpen] = useState([false]);
   const { setValue } = useFormContext();
 
@@ -99,35 +101,35 @@ const MeatSelect = () => {
     const newVisibility = !isVisible;
     setIsVisible(newVisibility);
     if (newVisibility) {
-      setSelectedOptions([meatVariants[0]]);
+      setMeatOptions([meatVariants[0]]);
       setIsOpen([false]);
     } else {
-      setSelectedOptions([]);
+      setMeatOptions([]);
       setValue(`base.meat`, [], { shouldValidate: true });
     }
   };
 
   const onOptionClicked = (value: string, index: number) => () => {
-    const newOptions = [...selectedOptions];
+    const newOptions = [...meatOptions];
     newOptions[index] = value;
-    setSelectedOptions(newOptions);
+    setMeatOptions(newOptions);
     toggling(index);
     setValue(`base.meat[${index}]`, value, { shouldValidate: true });
   };
 
   const addAnotherDropdown = () => {
-    if (selectedOptions.length < 3) {
-      const newOptions = [...selectedOptions, meatVariants[0]];
-      setSelectedOptions(newOptions);
+    if (meatOptions.length < 3) {
+      const newOptions = [...meatOptions, meatVariants[0]];
+      setMeatOptions(newOptions);
       setIsOpen([...isOpen, false]);
       setValue(`base.meat`, newOptions, { shouldValidate: true });
     }
   };
 
   const removeDropdown = (index: number) => {
-    const filteredOptions = selectedOptions.filter((_, i) => i !== index);
+    const filteredOptions = meatOptions.filter((_, i) => i !== index);
     const filteredIsOpen = isOpen.filter((_, i) => i !== index);
-    setSelectedOptions(filteredOptions);
+    setMeatOptions(filteredOptions);
     setIsOpen(filteredIsOpen);
     setValue(`base.meat`, filteredOptions, { shouldValidate: true });
   };
@@ -145,7 +147,7 @@ const MeatSelect = () => {
         <img onClick={addAnotherDropdown} src={Add} alt="Add" />
       </div>
       <DropdownsContainer isVisible={isVisible}>
-        {selectedOptions.map((option, index) => (
+        {meatOptions.map((option, index) => (
           <DropdownWithRemove key={index}>
             {index !== 0 && (
               <RemoveButton

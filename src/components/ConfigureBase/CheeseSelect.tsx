@@ -7,6 +7,7 @@ import Add from "../../arrows/PlusHover.svg";
 import { cheeseVariants } from "../../data/cheese";
 import { z } from "zod";
 import { useFormContext } from "react-hook-form";
+import { useStore } from "../../store";
 
 interface DropdownContainerProps {
   isVisible: boolean;
@@ -87,7 +88,8 @@ export const cheeseSchema = z.array(
 const CustomDropdown = () => {
   const [isVisible, setIsVisible] = useState(true);
 
-  const [selectedOptions, setSelectedOptions] = useState([cheeseVariants[0]]);
+  //const [selectedOptions, setSelectedOptions] = useState([cheeseVariants[0]]);
+  const { selectedOptions, setSelectedOptions } = useStore();
   const [isOpen, setIsOpen] = useState([false]);
   const { setValue } = useFormContext();
 

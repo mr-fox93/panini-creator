@@ -7,6 +7,7 @@ import Add from "../../arrows/PlusHover.svg";
 import { z } from "zod";
 import { useFormContext } from "react-hook-form";
 import { eggVariants } from "../../data/egg";
+import { useStore } from "../../store";
 
 interface DropdownContainerProps {
   isVisible: boolean;
@@ -87,7 +88,8 @@ export const eggSchema = z.array(
 const EggSelect = () => {
   const [isVisible, setIsVisible] = useState(true);
 
-  const [selectedOptions, setSelectedOptions] = useState([eggVariants[0]]);
+  //const [eggOptions, setEggOptions] = useState([eggVariants[0]]);
+  const { eggOptions, setEggOptions } = useStore();
   const [isOpen, setIsOpen] = useState([false]);
   const { setValue } = useFormContext();
 
@@ -99,10 +101,10 @@ const EggSelect = () => {
     const newVisibility = !isVisible;
     setIsVisible(newVisibility);
     if (newVisibility) {
-      setSelectedOptions([eggVariants[0]]);
+      setEggOptions([eggVariants[0]]);
       setIsOpen([false]);
     } else {
-      setSelectedOptions([]);
+      setEggOptions([]);
       setValue(
         `base.meat
       `,
@@ -113,9 +115,9 @@ const EggSelect = () => {
   };
 
   const onOptionClicked = (value: string, index: number) => () => {
-    const newOptions = [...selectedOptions];
+    const newOptions = [...eggOptions];
     newOptions[index] = value;
-    setSelectedOptions(newOptions);
+    setEggOptions(newOptions);
     toggling(index);
     setValue(
       `base.meat
@@ -126,9 +128,9 @@ const EggSelect = () => {
   };
 
   const addAnotherDropdown = () => {
-    if (selectedOptions.length < 2) {
-      const newOptions = [...selectedOptions, eggVariants[0]];
-      setSelectedOptions(newOptions);
+    if (eggOptions.length < 2) {
+      const newOptions = [...eggOptions, eggVariants[0]];
+      setEggOptions(newOptions);
       setIsOpen([...isOpen, false]);
       setValue(
         `base.meat
@@ -140,9 +142,9 @@ const EggSelect = () => {
   };
 
   const removeDropdown = (index: number) => {
-    const filteredOptions = selectedOptions.filter((_, i) => i !== index);
+    const filteredOptions = eggOptions.filter((_, i) => i !== index);
     const filteredIsOpen = isOpen.filter((_, i) => i !== index);
-    setSelectedOptions(filteredOptions);
+    setEggOptions(filteredOptions);
     setIsOpen(filteredIsOpen);
     setValue(
       `base.meat
@@ -165,7 +167,7 @@ const EggSelect = () => {
         <img onClick={addAnotherDropdown} src={Add} alt="Add" />
       </div>
       <DropdownsContainer isVisible={isVisible}>
-        {selectedOptions.map((option, index) => (
+        {eggOptions.map((option, index) => (
           <DropdownWithRemove key={index}>
             {index !== 0 && (
               <RemoveButton
