@@ -4,6 +4,7 @@ import On from "../../arrows/On.svg";
 import Off from "../../arrows/Off.svg";
 import { useFormContext } from "react-hook-form";
 import { z } from "zod";
+import { device } from "../../GlobalStyle";
 
 const CutleryContainer = styled.div`
   display: flex;
@@ -11,6 +12,11 @@ const CutleryContainer = styled.div`
   justify-content: space-between;
   width: 468px;
   height: 69px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 const Header = styled.header`

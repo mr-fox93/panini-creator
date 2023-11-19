@@ -3,6 +3,7 @@ import EggSelect from "./EggSelect";
 import Spreads from "./Spreads";
 import Serving from "./Serving";
 import Topping from "./Topping";
+import { device } from "../../GlobalStyle";
 
 export const Container = styled.div`
   display: flex;
@@ -14,6 +15,11 @@ export const Container = styled.div`
   border: 1px solid black;
   margin: auto;
   margin-top: 50px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 export const Header = styled.header`
@@ -21,6 +27,11 @@ export const Header = styled.header`
   font-weight: 400;
   margin-top: 86px;
   margin-bottom: 34px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 export const Bar = styled.div`
@@ -28,6 +39,11 @@ export const Bar = styled.div`
   height: 1px;
   background-color: black;
   margin-top: 5px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 export const Egg = styled.div`
@@ -37,6 +53,11 @@ export const Egg = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 const ConfigureExtras = () => {

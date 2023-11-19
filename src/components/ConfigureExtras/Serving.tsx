@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { z } from "zod";
 import { useFormContext } from "react-hook-form";
 import { useStore } from "../../store";
+import { device } from "../../GlobalStyle";
 
 const ServingComponent = styled.div`
   width: 468px;
@@ -14,6 +15,11 @@ const ServingComponent = styled.div`
   margin-top: 15px;
   align-items: center;
   margin-bottom: 15px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 const Header = styled.header`

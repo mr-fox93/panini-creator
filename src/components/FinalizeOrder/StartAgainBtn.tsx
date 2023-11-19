@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { device } from "../../GlobalStyle";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -8,6 +9,11 @@ const ButtonContainer = styled.div`
   width: 468px;
   height: 69px;
   margin-top: 5px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 const Button = styled.button`

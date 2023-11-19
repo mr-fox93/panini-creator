@@ -4,6 +4,7 @@ import Cutlery from "./Cutlery";
 import Napkins from "./Napkins";
 import PlaceOrderBtn from "./PlaceOrderBtn";
 import StartAgain from "./StartAgainBtn";
+import { device } from "../../GlobalStyle";
 
 export const Container = styled.div`
   display: flex;
@@ -15,6 +16,11 @@ export const Container = styled.div`
   border: 1px solid black;
   margin: auto;
   margin-top: 50px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 export const Header = styled.header`
@@ -29,6 +35,11 @@ export const Bar = styled.div`
   height: 1px;
   background-color: black;
   margin-top: 5px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 const FinalizeOrder: React.FC = () => {

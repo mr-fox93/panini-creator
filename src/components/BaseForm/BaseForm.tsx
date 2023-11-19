@@ -38,6 +38,7 @@ import { useRef } from "react";
 import { eggSchema } from "../ConfigureExtras/EggSelect";
 import RandomizedButton from "./RandomizedButton";
 import VegeOptions from "./VegeOptions";
+import { device } from "../../GlobalStyle";
 
 interface SandwichPayload {
   sandwichName: string;
@@ -78,6 +79,16 @@ const MainHeader = styled.div`
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+
+  @media ${device.mobile} {
+    /* left: 0;
+    transform: translateX(0); */
+    flex-direction: column;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const sandwichSchema = z.object({

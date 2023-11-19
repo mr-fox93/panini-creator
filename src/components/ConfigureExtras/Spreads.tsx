@@ -6,6 +6,7 @@ import Off from "../../arrows/Off.svg";
 import { z } from "zod";
 import { useFormContext } from "react-hook-form";
 import { useStore } from "../../store";
+import { device } from "../../GlobalStyle";
 
 const SpreadContainer = styled.div`
   display: flex;
@@ -13,6 +14,11 @@ const SpreadContainer = styled.div`
   width: 468px;
   height: 112px;
   margin-top: 15px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 const Header = styled.header`

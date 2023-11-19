@@ -47,6 +47,7 @@ const ListItem = styled.li`
   text-align: center;
   padding: 10px;
   border-bottom: 1px solid #000;
+  
   &:last-child {
     border-bottom: none;
   }

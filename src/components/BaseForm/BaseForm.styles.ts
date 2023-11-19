@@ -1,4 +1,6 @@
 import styled from "styled-components";
+//import { device } from "../../GlobalStyle";
+import GlobalStyle, { device } from "../../GlobalStyle";
 
 export const Container = styled.div`
   display: flex;
@@ -11,13 +13,22 @@ export const Container = styled.div`
   background: white;
   border: 1px solid black;
   margin: auto;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
-export const Header = styled.header`
+export const Header = styled.div`
   font-size: 26px;
   font-weight: 400;
   margin-top: 86px;
   margin-bottom: 34px;
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 export const Bar = styled.div`
@@ -26,6 +37,11 @@ export const Bar = styled.div`
   background-color: black;
   margin-top: 5px;
   margin-bottom: 10px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 export const Bread = styled.div`
@@ -35,6 +51,11 @@ export const Bread = styled.div`
   justify-content: space-between;
   align-items: center;
   text-align: center;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 export const Cheese = styled.div`
@@ -44,6 +65,11 @@ export const Cheese = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 export const Meat = styled.div`
@@ -53,6 +79,11 @@ export const Meat = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 export const Dressing = styled.div`
@@ -62,6 +93,11 @@ export const Dressing = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 export const Vegetables = styled.div`
@@ -71,6 +107,11 @@ export const Vegetables = styled.div`
   justify-content: space-between;
   margin-top: 20px;
   margin-bottom: 10px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 export const VegetablesOptions = styled.div`
@@ -78,6 +119,11 @@ export const VegetablesOptions = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 15px;
   justify-items: end;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 export const Button = styled.button`
@@ -94,6 +140,11 @@ export const Button = styled.button`
     border: 1px solid black;
     background: white;
   }
+
+  @media ${device.mobile} {
+    border: none;
+    font-size: 17px;
+  }
 `;
 
 export const PaniniName = styled.p`
@@ -109,4 +160,9 @@ export const RandomizedButton = styled.button`
   font-weight: 400;
   background: transparent;
   border: none;
+
+  @media ${device.mobile} {
+    border: none;
+    font-size: 17px;
+  }
 `;

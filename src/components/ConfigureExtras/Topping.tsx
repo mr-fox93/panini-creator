@@ -6,6 +6,7 @@ import Off from "../../arrows/Off.svg";
 import { z } from "zod";
 import { useFormContext } from "react-hook-form";
 import { useStore } from "../../store";
+import { device } from "../../GlobalStyle";
 
 const ToppingContainer = styled.div`
   display: flex;
@@ -13,6 +14,11 @@ const ToppingContainer = styled.div`
   justify-content: space-between;
   width: 468px;
   height: 69px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 const Header = styled.header`

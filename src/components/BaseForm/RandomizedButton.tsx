@@ -19,6 +19,7 @@ export const RandomizedButton = styled.button`
   font-weight: 400;
   background: transparent;
   border: none;
+  color: inherit;
   cursor: pointer;
 `;
 

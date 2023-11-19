@@ -4,6 +4,7 @@ import { useFormContext } from "react-hook-form";
 import { z } from "zod";
 import { enqueueSnackbar } from "notistack";
 import { useStore } from "../../store";
+import { device } from "../../GlobalStyle";
 
 interface CustomProps {
   hasError?: boolean;
@@ -15,6 +16,11 @@ const PaniniNameContainer = styled.div`
   justify-content: space-between;
   width: 468px;
   height: 69px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 const Header = styled.header`
@@ -33,6 +39,10 @@ const CustomInput = styled.input<CustomProps>`
     color: ${(props) => (props.hasError ? "red" : "#888")};
 
     padding: 1rem;
+  }
+
+  @media ${device.mobile} {
+    width: 230px;
   }
 `;
 
