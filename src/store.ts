@@ -1,6 +1,7 @@
 import create from "zustand";
 import { cheeseVariants } from "./data/cheese";
 import { meatVariants } from "./data/meat";
+import { eggVariants } from "./data/egg";
 
 type CarouselState = {
   index: number;
@@ -15,6 +16,12 @@ interface StoreState {
   vegetableArray: string[];
   isVisible: boolean;
   sandwichName: string;
+  spreadsArray: string[];
+  topping: string | null;
+  eggOptions: string[];
+  setEggOptions: (eggOptions: string[]) => void;
+  setTopping: (topping: string | null) => void;
+  setSpreadsArray: (spreadsArray: string[]) => void;
   setSandwichName: (sandwichName: string) => void;
   setIsVisible: (isVisible: boolean) => void;
   setVegetableArray: (vegetableArray: string[]) => void;
@@ -34,6 +41,12 @@ export const useStore = create<StoreState>((set) => ({
   meatOptions: [meatVariants[0]],
   isVisible: true,
   sandwichName: "",
+  spreadsArray: [],
+  topping: null,
+  eggOptions: [eggVariants[0]],
+  setEggOptions: (eggOptions) => set({ eggOptions }),
+  setTopping: (topping) => set({ topping }),
+  setSpreadsArray: (spreadsArray) => set({ spreadsArray }),
   setSandwichName: (sandwichName) => set({ sandwichName }),
   setIsVisible: (isVisible) => set({ isVisible }),
   carousels: <CarouselState[]>[{ index: 0 }],

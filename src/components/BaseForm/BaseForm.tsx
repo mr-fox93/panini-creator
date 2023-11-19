@@ -157,8 +157,7 @@ const BaseForm = () => {
               <img src={Dices} alt="randomize panii" />
               <p>RANDOMIZED PANINI</p>
             </RandomizedButton> */}
-            {/* <RandomizedButton /> */}
-            <VegeOptions />
+            <RandomizedButton />
           </MainHeader>
           <Container>
             <Header>CONFIGURE BASE</Header>

@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { meatVariants } from "../../data/meat";
 import { dressingVariants } from "../../data/dressing";
 import { vegetableVariant } from "../../data/vegetable";
+import { spreadVariant } from "../../data/spread";
+import { eggVariants } from "../../data/egg";
 
 export const RandomizedButton = styled.button`
   display: flex;
@@ -23,33 +25,28 @@ export const RandomizedButton = styled.button`
 const Randomize = () => {
   const {
     setServingArray,
-    servingArray,
-    currentIndex,
     setCurrentIndex,
-    selectedOptions,
     setSelectedOptions,
-    meatOptions,
     setMeatOptions,
     carousels,
     setCarousels,
-    vegetableArray,
     setVegetableArray,
     setIsVisible,
     isVisible,
+    setSandwichName,
+    setSpreadsArray,
+    setTopping,
+    topping,
+    setEggOptions,
   } = useStore();
   const serving = servingVariant;
   const bread = breadVariants;
   const cheese = cheeseVariants;
   const meat = meatVariants;
-  const dressing = dressingVariants;
   const vegetables = vegetableVariant;
-
-  //   const randomizeCarousels = () => {
-  //     const newCarousels = carousels.map(() => {
-  //       return { index: Math.floor(Math.random() * dressingVariants.length) };
-  //     });
-  //     setCarousels(newCarousels);
-  //   };
+  const paniniName = ["Panini Paradise", "Heaven Panini", "Special Panii"];
+  const spreads = spreadVariant;
+  const egg = eggVariants;
 
   const randomizeVegetables = () => {
     const randomVisible = Math.random() < 0.5;
@@ -72,27 +69,17 @@ const Randomize = () => {
     setCurrentIndex(bread[Math.floor(Math.random() * bread.length)]);
     setSelectedOptions([cheese[Math.floor(Math.random() * cheese.length)]]);
     setMeatOptions([meat[Math.floor(Math.random() * meat.length)]]);
-    //randomizeCarousels();
+    setSandwichName(paniniName[Math.floor(Math.random() * paniniName.length)]);
+    setSpreadsArray([spreads[Math.floor(Math.random() * spreads.length)]]);
+    setTopping(topping === "SESAME" ? null : "SESAME");
+    setEggOptions([egg[Math.floor(Math.random() * egg.length)]]);
     setCarousels(
       carousels.map(() => {
         return { index: Math.floor(Math.random() * dressingVariants.length) };
       })
     );
-    // setVegetableArray([
-    //   vegetables[Math.floor(Math.random() * vegetables.length)],
-    // ]);
+
     randomizeVegetables();
-
-    // const numberOfCheeseSelectors = Math.floor(Math.random() * 2) + 1; // Losuje 1 lub 2
-    // const newSelectedOptions = [];
-
-    // for (let i = 0; i < numberOfCheeseSelectors; i++) {
-    //   newSelectedOptions.push(
-    //     cheese[Math.floor(Math.random() * cheese.length)]
-    //   );
-    // }
-
-    // setSelectedOptions(newSelectedOptions);
   };
 
   return (
