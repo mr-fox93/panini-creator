@@ -27,6 +27,8 @@ const Button = styled.button<ButtonProps>`
   height: 38px;
   border: ${(props) => (props.isSelected ? "1px solid black" : "none")};
   color: inherit;
+  /* font-family: "Instrument Serif", serif;
+  font-size: 14px; */
 `;
 
 const vegetableArray = z.enum(vegetableVariant as [string, ...string[]]);
