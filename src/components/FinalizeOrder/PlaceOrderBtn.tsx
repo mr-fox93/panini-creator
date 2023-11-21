@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { device } from "../../GlobalStyle";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -7,6 +8,11 @@ const ButtonContainer = styled.div`
   width: 468px;
   height: 69px;
   margin-top: 50px;
+
+  @media ${device.mobile} {
+    border: none;
+    width: 99%;
+  }
 `;
 
 const Button = styled.button`
