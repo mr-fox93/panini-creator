@@ -39,6 +39,7 @@ import { eggSchema } from "../ConfigureExtras/EggSelect";
 import RandomizedButton from "./RandomizedButton";
 import VegeOptions from "./VegeOptions";
 import { device } from "../../GlobalStyle";
+import SuccesAnimationScreen from "../../pages/SuccesAnimationScreen";
 
 interface SandwichPayload {
   sandwichName: string;

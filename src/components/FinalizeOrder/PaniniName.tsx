@@ -43,6 +43,7 @@ const CustomInput = styled.input<CustomProps>`
 
   @media ${device.mobile} {
     width: 230px;
+    font-size: 16px;
   }
 `;
 
@@ -57,7 +58,6 @@ export const paniniNameSchema = z
   .max(35);
 
 const PaniniName = () => {
-  //const [sandwichName, setSandwichName] = useState<string>("");
   const { sandwichName, setSandwichName } = useStore();
   const {
     register,

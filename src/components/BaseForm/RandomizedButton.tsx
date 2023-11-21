@@ -10,6 +10,7 @@ import { dressingVariants } from "../../data/dressing";
 import { vegetableVariant } from "../../data/vegetable";
 import { spreadVariant } from "../../data/spread";
 import { eggVariants } from "../../data/egg";
+import { useFormContext } from "react-hook-form";
 
 export const RandomizedButton = styled.button`
   display: flex;
@@ -24,6 +25,8 @@ export const RandomizedButton = styled.button`
 `;
 
 const Randomize = () => {
+  const { setValue } = useFormContext();
+
   const {
     setServingArray,
     setCurrentIndex,
@@ -71,6 +74,11 @@ const Randomize = () => {
     setSelectedOptions([cheese[Math.floor(Math.random() * cheese.length)]]);
     setMeatOptions([meat[Math.floor(Math.random() * meat.length)]]);
     setSandwichName(paniniName[Math.floor(Math.random() * paniniName.length)]);
+    setValue(
+      "sandwichName",
+      paniniName[Math.floor(Math.random() * paniniName.length)]
+    );
+
     setSpreadsArray([spreads[Math.floor(Math.random() * spreads.length)]]);
     setTopping(topping === "SESAME" ? null : "SESAME");
     setEggOptions([egg[Math.floor(Math.random() * egg.length)]]);

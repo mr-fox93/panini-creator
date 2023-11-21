@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useFormContext } from "react-hook-form";
 
 type CircleVariant = {
   style: any;
@@ -37,14 +38,20 @@ const fadeDown = {
 };
 
 const StartAnimationScreen = () => {
+  // const { reset } = useFormContext();
+
   const [startAnimation, setStartAnimation] = useState(true);
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
     setStartAnimation(false);
-    setTimeout(() => {
-      navigate("/home");
-    }, 1300);
+    // reset();
+    navigate("/home");
+    window.location.reload();
+
+    // setTimeout(() => {
+    //   navigate("/home");
+    // }, 1300);
   };
 
   const circleCommonStyle = {
@@ -150,7 +157,7 @@ const StartAnimationScreen = () => {
           <span>Panini Creator</span>
           <motion.button
             whileHover={{ scale: 1.05, border: "1px solid black" }}
-            onClick={handleButtonClick}
+            onClick={() => handleButtonClick()}
             style={{
               padding: "14px 20px",
               justifyContent: "center",
