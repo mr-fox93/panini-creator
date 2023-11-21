@@ -40,7 +40,7 @@ const StartAgain = () => {
   };
   return (
     <ButtonContainer>
-      <Button onClick={() => handleStartAgain()} type="button">
+      <Button onClick={handleStartAgain} type="button">
         START AGAIN
       </Button>
     </ButtonContainer>
