@@ -1,4 +1,12 @@
 import {
+  Spinner,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  Stack,
+} from "@chakra-ui/react";
+
+import {
   Container,
   Header,
   Bar,
@@ -34,12 +42,13 @@ import { toppingSchema } from "../ConfigureExtras/Topping";
 import { servingSchema } from "../ConfigureExtras/Serving";
 import { spreadsSchema } from "../ConfigureExtras/Spreads";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { eggSchema } from "../ConfigureExtras/EggSelect";
 import RandomizedButton from "./RandomizedButton";
 import VegeOptions from "./VegeOptions";
 import { device } from "../../GlobalStyle";
 import SuccesAnimationScreen from "../../pages/SuccesAnimationScreen";
+import { useStore } from "../../store";
 
 interface SandwichPayload {
   sandwichName: string;
@@ -112,6 +121,7 @@ const sandwichSchema = z.object({
 });
 
 const BaseForm = () => {
+  const { setImageUrl, isLoading, setIsLoading } = useStore();
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const methods = useForm<SandwichPayload>({
@@ -131,6 +141,7 @@ const BaseForm = () => {
   });
 
   const onSubmit = methods.handleSubmit((data: SandwichPayload) => {
+    setIsLoading(true);
     console.log(data);
 
     fetch("https://training.nerdbord.io/api/v1/panini-creator/order", {
@@ -148,9 +159,11 @@ const BaseForm = () => {
         return response.json();
       })
       .then((data) => {
+        setIsLoading(false);
         console.log("Success:", data);
         if (data.imageUrl) {
-          window.open(data.imageUrl, "_blank");
+          //window.open(data.imageUrl, "_blank");
+          setImageUrl(data.imageUrl);
         }
         navigate("/success");
       })

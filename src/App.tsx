@@ -3,6 +3,7 @@ import StartAnimationScreen from "./pages/StartAnimationScreen";
 import BaseForm from "./components/BaseForm/BaseForm";
 import SuccesAnimationScreen from "./pages/SuccesAnimationScreen";
 import GlobalStyle from "./GlobalStyle";
+import FinishPage from "./components/FinalizeOrder/FinishPage";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<StartAnimationScreen />} />
         <Route path="/home" element={<BaseForm />} />
-        <Route path="/success" element={<SuccesAnimationScreen />} />
+        <Route path="/success" element={<FinishPage />} />
       </Routes>
     </BrowserRouter>
   );
