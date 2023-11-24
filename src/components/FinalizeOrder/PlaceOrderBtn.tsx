@@ -1,6 +1,14 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { device } from "../../GlobalStyle";
+import { useStore } from "../../store";
+import { Spinner } from "@chakra-ui/react";
+import { Spinner as ChakraSpinner } from "@chakra-ui/react";
+
+const StyledSpinner = styled(ChakraSpinner)`
+  width: 11px;
+  height: 11px;
+`;
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -19,6 +27,8 @@ const Button = styled.button`
   width: 468px;
   height: 46px;
   background: black;
+  text-align: center;
+  align-items: center;
   border: none;
   color: white;
   transition: all 0.2s ease;
@@ -30,9 +40,12 @@ const Button = styled.button`
 `;
 
 const PlaceOrderBtn: React.FC = () => {
+  const { isLoading } = useStore();
   return (
     <ButtonContainer>
-      <Button type="submit">PLACE ORDER</Button>
+      <Button type="submit">
+        PLACE ORDER {isLoading && <StyledSpinner size="xl" />}
+      </Button>
     </ButtonContainer>
   );
 };
